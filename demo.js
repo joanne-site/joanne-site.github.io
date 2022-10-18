@@ -132,6 +132,7 @@ function subscribeUser(swRegistration) {
         .then(subscription => {
             //訂閱發生後
             console.log('訂閱發生')
+            console.log(JSON.stringify(subscription));
         })
         .catch(err => {
             console.log('Failed to subscribe the user: ', err);
@@ -147,7 +148,6 @@ function displayNotification(permission) {
                 image: 'https://augt-forum-upload.s3-ap-southeast-1.amazonaws.com/original/1X/6b3cd55281b7bedea101dc36a6ef24034806390b.png'
             };
             reg.showNotification('Angular User Group Taiwan', options);
-            console.log('displayNotification');
         });
     // }
 }
