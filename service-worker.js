@@ -145,7 +145,6 @@ self.addEventListener('message', function (event) {
     // until the promise is resolved.
     if ('waitUntil' in event) {
         event.waitUntil(p);
-        event.waitUntil(self.registration.showNotification(title, options));
     }
 
     // Without support for waitUntil(), there's a chance that if the promise chain

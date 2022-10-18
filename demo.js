@@ -53,6 +53,7 @@ function sendMessage(message) {
                 reject(event.data.error);
             } else {
                 resolve(event.data);
+                displayNotification(permission)
             }
         };
 
@@ -138,7 +139,7 @@ function subscribeUser(swRegistration) {
 }
 
 function displayNotification(permission) {
-    if (permission == 'granted') {
+    // if (permission == 'granted') {
         navigator.serviceWorker.getRegistration().then(reg => {
             var options = {
                 icon: 'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg',
@@ -148,5 +149,5 @@ function displayNotification(permission) {
             reg.showNotification('Angular User Group Taiwan', options);
             console.log('displayNotification');
         });
-    }
+    // }
 }
