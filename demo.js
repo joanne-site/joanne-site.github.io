@@ -76,7 +76,21 @@ if ('serviceWorker' in navigator) {
 
     navigator.serviceWorker.register('service-worker.js')
         // Wait until the service worker is active.
-        .then(function () {
+        .then(function (reg) {
+
+
+            //要求訂閱
+            if ('Notification' in window) {
+                console.log('Notification permission default status:', Notification.permission);
+                Notification.requestPermission(function (status) {
+                    console.log('Notification permission status:', status);
+                });
+            }
+            //測試用 顯示訂閱訊息
+            // displayNotification()
+
+            //訂閱使用者
+            subscribeUser(reg);
             return navigator.serviceWorker.ready;
         })
         // ...and then show the interface for the commands once it's ready.
@@ -89,3 +103,49 @@ if ('serviceWorker' in navigator) {
 } else {
     ChromeSamples.setStatus('This browser does not support service workers.');
 }
+
+function urlB64ToUint8Array(base64String) {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding)
+        .replace(/\-/g, '+')
+        .replace(/_/g, '/');
+
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+
+    for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+}
+
+function subscribeUser(swRegistration) {
+    //公鑰
+    const PublicKey = "BPqjdN9wiXlyvlKgrDN0f1K0LtR-f3NX4f6b2qE1itrBeDiGzrzvWnuR0WQHsmySw5jTypBIRU8ad-8GW9PmnlQ";
+    const applicationServerKey = urlB64ToUint8Array(PublicKey);
+    swRegistration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: applicationServerKey
+    })
+        .then(subscription => {
+            console.log('User is subscribed');
+            console.log(JSON.stringify(subscription));
+        })
+        .catch(err => {
+            console.log('Failed to subscribe the user: ', err);
+        });
+}
+
+function displayNotification() {
+    if (Notification.permission == 'granted') {
+      navigator.serviceWorker.getRegistration().then(reg => {
+        var options = {
+          icon: 'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg',
+          body: '這是測試==顯示==訊息',
+          image: 'https://augt-forum-upload.s3-ap-southeast-1.amazonaws.com/original/1X/6b3cd55281b7bedea101dc36a6ef24034806390b.png'
+        };
+        reg.showNotification('Angular User Group Taiwan', options);
+        console.log('displayNotification');
+      });
+    }
+  }
