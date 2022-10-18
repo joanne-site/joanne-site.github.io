@@ -87,11 +87,11 @@ if ('serviceWorker' in navigator) {
                 });
             }
             //測試用 顯示訂閱訊息
-            displayNotification()
+            displayNotification(Notification.permission)
 
             //訂閱使用者
             // subscribeUser(reg);
-            
+
             return navigator.serviceWorker.ready;
         })
         // ...and then show the interface for the commands once it's ready.
@@ -137,8 +137,8 @@ function subscribeUser(swRegistration) {
         });
 }
 
-function displayNotification() {
-    if (Notification.permission == 'granted') {
+function displayNotification(permission) {
+    if (permission == 'granted') {
       navigator.serviceWorker.getRegistration().then(reg => {
         var options = {
           icon: 'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg',
