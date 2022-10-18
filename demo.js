@@ -87,10 +87,11 @@ if ('serviceWorker' in navigator) {
                 });
             }
             //測試用 顯示訂閱訊息
-            // displayNotification()
+            displayNotification()
 
             //訂閱使用者
-            subscribeUser(reg);
+            // subscribeUser(reg);
+            
             return navigator.serviceWorker.ready;
         })
         // ...and then show the interface for the commands once it's ready.

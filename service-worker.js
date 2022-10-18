@@ -148,30 +148,30 @@ self.addEventListener('message', function (event) {
     // stopped before it's complete.
 });
 
-// self.addEventListener('notificationclick', event => {
-//     const notification = event.notification;
-//     const action = event.action;
-//     const link = notification.data.link;
-//     if (action !== 'close') {
-//         if (link) {
-//             clients.openWindow(link);
-//         }
-//     }
-//     notification.close();
-//     console.log('notificationclick action is', action);
-// })
-
-self.addEventListener('push', event => {
-    console.log('推播訊息');
-    let title = 'Server Push';
-    let options = {
-        body: 'push TEST',
-        icon: 'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg'
-    };
-    if (event.data) {
-        options = event.data.json();
-        title = options.title;
+self.addEventListener('notificationclick', event => {
+    const notification = event.notification;
+    const action = event.action;
+    const link = notification.data.link;
+    if (action !== 'close') {
+        if (link) {
+            clients.openWindow(link);
+        }
     }
+    notification.close();
+    console.log('notificationclick action is', action);
+})
 
-    event.waitUntil(self.registration.showNotification(title, options));
-});
+// self.addEventListener('push', event => {
+//     console.log('推播訊息');
+//     let title = 'Server Push';
+//     let options = {
+//         body: 'push TEST',
+//         icon: 'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg'
+//     };
+//     if (event.data) {
+//         options = event.data.json();
+//         title = options.title;
+//     }
+
+//     event.waitUntil(self.registration.showNotification(title, options));
+// });
