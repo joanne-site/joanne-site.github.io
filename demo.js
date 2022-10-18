@@ -87,10 +87,10 @@ if ('serviceWorker' in navigator) {
                 });
             }
             //測試用 顯示訂閱訊息
-            displayNotification(Notification.permission)
+            // displayNotification(Notification.permission)
 
             //訂閱使用者
-            // subscribeUser(reg);
+            subscribeUser(reg);
 
             return navigator.serviceWorker.ready;
         })
@@ -129,8 +129,8 @@ function subscribeUser(swRegistration) {
         applicationServerKey: applicationServerKey
     })
         .then(subscription => {
-            console.log('User is subscribed');
-            console.log(JSON.stringify(subscription));
+            //訂閱發生後
+            console.log('訂閱發生')
         })
         .catch(err => {
             console.log('Failed to subscribe the user: ', err);
@@ -139,14 +139,14 @@ function subscribeUser(swRegistration) {
 
 function displayNotification(permission) {
     if (permission == 'granted') {
-      navigator.serviceWorker.getRegistration().then(reg => {
-        var options = {
-          icon: 'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg',
-          body: '這是測試==顯示==訊息',
-          image: 'https://augt-forum-upload.s3-ap-southeast-1.amazonaws.com/original/1X/6b3cd55281b7bedea101dc36a6ef24034806390b.png'
-        };
-        reg.showNotification('Angular User Group Taiwan', options);
-        console.log('displayNotification');
-      });
+        navigator.serviceWorker.getRegistration().then(reg => {
+            var options = {
+                icon: 'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg',
+                body: '這是測試==顯示==訊息',
+                image: 'https://augt-forum-upload.s3-ap-southeast-1.amazonaws.com/original/1X/6b3cd55281b7bedea101dc36a6ef24034806390b.png'
+            };
+            reg.showNotification('Angular User Group Taiwan', options);
+            console.log('displayNotification');
+        });
     }
-  }
+}

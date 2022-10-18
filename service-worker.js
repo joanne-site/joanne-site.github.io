@@ -161,17 +161,17 @@ self.addEventListener('notificationclick', event => {
     console.log('notificationclick action is', action);
 })
 
-// self.addEventListener('push', event => {
-//     console.log('推播訊息');
-//     let title = 'Server Push';
-//     let options = {
-//         body: 'push TEST',
-//         icon: 'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg'
-//     };
-//     if (event.data) {
-//         options = event.data.json();
-//         title = options.title;
-//     }
+self.addEventListener('push', event => {
+    console.log('推播訊息');
+    let title = 'Server Push';
+    let options = {
+        body: 'push TEST',
+        icon: 'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg'
+    };
+    if (event.data) {
+        options = event.data.json();
+        title = options.title;
+    }
 
-//     event.waitUntil(self.registration.showNotification(title, options));
-// });
+    event.waitUntil(self.registration.showNotification(title, options));
+});
