@@ -1,0 +1,100 @@
+<!doctype html>
+<!--
+Copyright 2022 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Sample illustrating the use of Service Worker postMessage().">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Service Worker postMessage() Sample</title>
+    <script>
+        // Add a global error event listener early on in the page load, to help ensure that browsers
+        // which don't support specific functionality still end up displaying a meaningful message.
+        window.addEventListener('error', function (error) {
+            if (ChromeSamples && ChromeSamples.setStatus) {
+                console.error(error);
+                ChromeSamples.setStatus(error.message + ' (Your browser may not support this feature.)');
+                error.preventDefault();
+            }
+        });
+    </script>
+    <style>
+        #status{
+            background-color: red;
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>不重要的說明</h1>
+    <script>
+        var ChromeSamples = {
+            log: function () {
+                var line = Array.prototype.slice.call(arguments).map(function (argument) {
+                    return typeof argument === 'string' ? argument : JSON.stringify(argument);
+                }).join(' ');
+
+                document.querySelector('#log').textContent += line + '\n';
+            },
+
+            clearLog: function () {
+                document.querySelector('#log').textContent = '';
+            },
+
+            setStatus: function (status) {
+                document.querySelector('#status').textContent = status;
+            },
+
+            setContent: function (newContent) {
+                var content = document.querySelector('#content');
+                while (content.hasChildNodes()) {
+                    content.removeChild(content.lastChild);
+                }
+                content.appendChild(newContent);
+            }
+        };
+    </script>
+
+    <h3>Live Output</h3>
+    <div id="output" class="output">
+        <div id="content">
+            <div id="commands" style="display: none">
+                <div>
+                    <label for="url">Resource URL:</label>
+                    <input id="url" type="text" size="50" value="https://www.google.com/">
+                    <button id="add">Add to Cache</button>
+                    <button id="delete">Delete from Cache</button>
+                </div>
+                <div>
+                    <button id="listcontents">List Current Cache Contents</button>
+                </div>
+                <ul id="contents"></ul>
+            </div>
+        </div>
+        <div id="status"></div>
+        <pre id="log"></pre>
+    </div>
+
+    <script src="demo.js"></script>
+
+</body>
+
+</html>
