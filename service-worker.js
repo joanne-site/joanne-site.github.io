@@ -36,7 +36,7 @@ var CURRENT_CACHES = {
 self.clients.matchAll().then(function(clients) {
   clients.forEach(function(client) {
     console.log(client);
-    client.postMessage('The service worker just started up.');
+    client.postMessage('訊息剛成立');
   });
 });
 
@@ -76,7 +76,8 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('message', function(event) {
-  console.log('Handling message event:', event);
+  console.log('SW發生訊息事件:', event);
+  console.log(event.data);
   var p = caches.open(CURRENT_CACHES['post-message']).then(function(cache) {
     switch (event.data.command) {
       // This command returns a list of the URLs corresponding to the Request objects

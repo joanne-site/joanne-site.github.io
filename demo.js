@@ -47,6 +47,7 @@ function sendMessage(message) {
     // a convenient wrapper.
     return new Promise(function (resolve, reject) {
         var messageChannel = new MessageChannel();
+        console.log('帶去訊息事件');
         messageChannel.port1.onmessage = function (event) {
             if (event.data.error) {
                 reject(event.data.error);
