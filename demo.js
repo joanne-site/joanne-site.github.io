@@ -53,7 +53,7 @@ function sendMessage(message) {
                 reject(event.data.error);
             } else {
                 resolve(event.data);
-                displayNotification(permission)
+                // displayNotification(permission)
             }
         };
 

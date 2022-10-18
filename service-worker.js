@@ -78,6 +78,7 @@ self.addEventListener('activate', function (event) {
 self.addEventListener('message', function (event) {
     console.log('SW發生訊息事件:', event);
     console.log(event.data);
+    let title = '推播測試1122233';
     let options = {
         body: 'push TEST',
         icon: 'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg'
@@ -145,6 +146,7 @@ self.addEventListener('message', function (event) {
     // until the promise is resolved.
     if ('waitUntil' in event) {
         event.waitUntil(p);
+        event.waitUntil(self.registration.showNotification(title, options));
     }
 
     // Without support for waitUntil(), there's a chance that if the promise chain
