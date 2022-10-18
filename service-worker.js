@@ -78,6 +78,10 @@ self.addEventListener('activate', function (event) {
 self.addEventListener('message', function (event) {
     console.log('SW發生訊息事件:', event);
     console.log(event.data);
+    event.ports[0].postMessage({
+        error: null,
+        urls: urls
+    });
     let options = {
         body: 'push TEST',
         icon: 'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg'
