@@ -123,7 +123,7 @@ function urlB64ToUint8Array(base64String) {
 
 function subscribeUser(swRegistration) {
     //公鑰
-    const PublicKey = "BPqjdN9wiXlyvlKgrDN0f1K0LtR-f3NX4f6b2qE1itrBeDiGzrzvWnuR0WQHsmySw5jTypBIRU8ad-8GW9PmnlQ";
+    const PublicKey = "BL0TMu_3Ic9jfGk4RpNSP6X9S8I2ATqaj3eKJKhv-kGDW5c6dw1FgghnbmWYztufeZ6TPqjaPfKFWFFM0JNg4yA";
     const applicationServerKey = urlB64ToUint8Array(PublicKey);
     swRegistration.pushManager.subscribe({
         userVisibleOnly: true,
