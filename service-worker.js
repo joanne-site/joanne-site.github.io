@@ -175,6 +175,7 @@ self.addEventListener('push', event => {
         icon: 'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg'
     };
     if (event.data) {
+        console.log(event.data);
         options = event.data.json();
         title = options.title;
     }
